@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.res-container{
+    display: flex;
+    margin: 0px 4px;
+    justify-content:center;
+    flex-wrap: wrap;
+}
+
+.res-card {
+    padding: 2px;
+    width: 180px;
+    height: 320px;
+    border:1px;
+    cursor: pointer;
+}
+.res-logo{
+    width: 100%;
+    height: 50%;  
+}
