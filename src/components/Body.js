@@ -4,6 +4,8 @@ import Browse from './Browse';
 import Cart from './Cart';
 
 import { RouterProvider, createBrowserRouter} from 'react-router-dom';
+import Favourites from './Favourites';
+import ProductPage from './ProductPage';
 
 
 
@@ -18,11 +20,16 @@ const Body = () => {
         element: <Browse/>,
     },
     {
-        path: "/cart",
+        path: "/orders",
         element: <Cart/>
     },
     {
-        path:""
+        path:"/favourites",
+        element: <Favourites/>
+    },
+    {
+      path:"/product/:prodId",
+      element: <ProductPage/>
     }
     
 

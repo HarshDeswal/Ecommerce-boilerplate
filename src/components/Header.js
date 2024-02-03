@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 // import { auth } from '../utils/firebase';
 // import { signOut } from "firebase/auth";
 // import {useNavigate} from 'react-router-dom'
@@ -47,9 +48,9 @@ const Header = () => {
         <p className='font-semibold text-3xl'>ShopKart.</p>
 
         {<div className='flex justify-end md:justify-normal p-2 items-center'>
-          <button className='py-2 px-4 m-2 text-white rounded-lg'>Products</button>
+          <Link to={"/browse"}><button className='py-2 px-4 m-2 text-white rounded-lg'>Products</button></Link>
           <button className='font-bold text-white'>Sign Out</button>
-          
+        <Link to={"/orders"}>
         <div class="flex justify-center items-center">
             <div class="relative">
                 <div class="absolute left-3">
@@ -60,6 +61,7 @@ const Header = () => {
                 </svg>
             </div>
         </div>
+        </Link> 
         </div>}
     </div>
   )
