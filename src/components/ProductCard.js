@@ -44,13 +44,13 @@ const ProductCard = ({product}) => {
             <p className='text-sm mt-2 ml-2'>{"₹ "+product.amount}</p>
             <p className='text-xs mt-2 ml-2 pl-1 bg-green-500 w-6 text-white '>{product.rating}</p>
         
+        </Link>
             <div className='flex justify-between mx-2'>
                 {isFavorite ? <p onClick={handleFavourite}>❤️</p>:<p onClick={handleFavourite}>🩶</p>}
-                <p onClick={handleCart}>
+                <p onClick={handleFavourite}>
                 🛒
                 </p>
             </div>
-        </Link>
         </div>
     </div>
   )
