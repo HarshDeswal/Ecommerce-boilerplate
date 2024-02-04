@@ -1,16 +1,17 @@
 import React from 'react'
 import {useSelector,useDispatch} from 'react-redux'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Header from './Header';
-import { addCartProducts } from '../utils/productSlice';
+import { addFavouriteProducts } from '../utils/productSlice';
 
 const ProductPage = () => {
     const {prodId} = useParams();
     const dispatch = useDispatch();
     const productData = useSelector((store) => store.products.allProducts);
-    const currentProduct = productData.filter(prod => prod.id === prodId);
+    if(productData===null) return null;
+    const currentProduct = productData?.filter(prod => prod.id === prodId);
     const addToCart = () => {
-        dispatch(addCartProducts(currentProduct));
+        dispatch(addFavouriteProducts(currentProduct));
     }
   return (
     <div>
@@ -34,13 +35,13 @@ const ProductPage = () => {
                 <div class="flex mb-4">
                     <div class="mr-4">
                         
-                        <span class="text-black font-semibold text-3xl">${" "+currentProduct[0].amount}</span>
+                        <span class="text-black font-semibold text-3xl">₹{" "+currentProduct[0].amount}</span>
                     </div>
             
                 </div>
                 <div class="flex mb-4 mt-[190px]">
                     <div class="w-1/2 px-2">
-                        <button class="w-full text-black py-2 px-4 rounded-sm font-bold hover:bg-black hover:text-white border-2 border-black">Buy Now</button>
+                        <Link to={'/orders'} onClick={addToCart}><button class="w-full text-black py-2 px-4 rounded-sm font-bold hover:bg-black hover:text-white border-2 border-black">Buy Now</button></Link>
             
                     </div>
                     <div class="w-1/2 px-2">
