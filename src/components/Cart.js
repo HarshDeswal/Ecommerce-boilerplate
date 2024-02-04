@@ -7,6 +7,7 @@ import { clearFavourite,addFavouriteProducts } from '../utils/productSlice';
 
 const Cart = () => {
   const cartData = useSelector(store => store.products.favouriteProducts);
+  console.log(cartData);
   const dispatch = useDispatch();
   const [quantities, setQuantities] = useState({}); // State to manage quantities
 
@@ -18,10 +19,6 @@ const Cart = () => {
         [productId]: newQuantity
       }));
     }
-    // setQuantities(prevQuantities => ({
-    //   ...prevQuantities,
-    //   [productId]: newQuantity
-    // }));
   };
   const calculateTotalPrice = () => {
     let totalPrice = 0;
@@ -40,10 +37,10 @@ const Cart = () => {
     setQuantities(initialQuantities);
   }, [cartData]);
 
-  function deleteObject (array,itemId){
-    const newArray=array.filter((ele)=> ele.id!==itemId)
+  const deleteObject  = (itemId)=>{
+    const newArray=cartData.filter((ele)=> ele.id!==itemId)
     dispatch(clearFavourite());
-    newArray.length!==0? dispatch(addFavouriteProducts(newArray)):dispatch(clearFavourite());
+    newArray.length>0 && dispatch(addFavouriteProducts(newArray))
 
     setQuantities(prevQuantities => {
       const updatedQuantities = { ...prevQuantities };
@@ -75,7 +72,7 @@ const Cart = () => {
                       <span className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50" onClick={() => updateQuantity(prod.id, (quantities[prod.id] || 0) + 1)}> + </span>
                     </div>
                     <div className="flex items-center space-x-4">
-                      <p className="text-sm font-semibold">{"₹ " + prod.amount}</p><p onClick={deleteObject(cartData,prod.id)}>
+                      <p className="text-sm font-semibold">{"₹ " + prod.amount}</p><p onClick={deleteObject(prod.id)}>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                       </svg></p>

@@ -1,13 +1,17 @@
 import React from 'react'
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
 import { useParams } from 'react-router-dom';
 import Header from './Header';
+import { addCartProducts } from '../utils/productSlice';
 
 const ProductPage = () => {
     const {prodId} = useParams();
+    const dispatch = useDispatch();
     const productData = useSelector((store) => store.products.allProducts);
     const currentProduct = productData.filter(prod => prod.id === prodId);
-    
+    const addToCart = () => {
+        dispatch(addCartProducts(currentProduct));
+    }
   return (
     <div>
         <Header/>
@@ -40,7 +44,7 @@ const ProductPage = () => {
             
                     </div>
                     <div class="w-1/2 px-2">
-                        <button class="w-full bg-black  text-white dark:text-white py-2 px-4 hover:bg-white hover:text-black rounded-sm font-bold border-2 border-black ">Add to Basket</button>
+                        <button class="w-full bg-black  text-white dark:text-white py-2 px-4 hover:bg-white hover:text-black rounded-sm font-bold border-2 border-black " onClick={addToCart}>Add to Basket</button>
                     </div>
                 </div>
                 
